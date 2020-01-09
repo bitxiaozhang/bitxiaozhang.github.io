@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.7.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://yoursite.com').hostname,
+    root: '/',
+    scheme: 'Muse',
+    version: '7.7.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="基于该网站深入理解groovy学习，Android Studio使用gradle工具进行打包编译的，而gradle使用groovy语言编写的，groovy是一种DSL语言，即Domain Specific Language领域相关语言，有很多默认的潜规则，使用起来非常灵活。 Groovy的开发环境在ubuntu上搭建groovy的开发环境还是非常简单的，具体也可以参考官网groovy官网123-">
+<meta name="keywords" content="-Groovy">
+<meta property="og:type" content="article">
+<meta property="og:title" content="简单学习Groovy">
+<meta property="og:url" content="http://yoursite.com/2017/06/24/简单学习Groovy/index.html">
+<meta property="og:site_name" content="bitxiaozhang">
+<meta property="og:description" content="基于该网站深入理解groovy学习，Android Studio使用gradle工具进行打包编译的，而gradle使用groovy语言编写的，groovy是一种DSL语言，即Domain Specific Language领域相关语言，有很多默认的潜规则，使用起来非常灵活。 Groovy的开发环境在ubuntu上搭建groovy的开发环境还是非常简单的，具体也可以参考官网groovy官网123-">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-09-24T12:57:05.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="简单学习Groovy">
+<meta name="twitter:description" content="基于该网站深入理解groovy学习，Android Studio使用gradle工具进行打包编译的，而gradle使用groovy语言编写的，groovy是一种DSL语言，即Domain Specific Language领域相关语言，有很多默认的潜规则，使用起来非常灵活。 Groovy的开发环境在ubuntu上搭建groovy的开发环境还是非常简单的，具体也可以参考官网groovy官网123-">
+
+<link rel="canonical" href="http://yoursite.com/2017/06/24/简单学习Groovy/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>简单学习Groovy | bitxiaozhang</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">bitxiaozhang</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">折腾的人</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/24/简单学习Groovy/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="BITXIAOZHANG">
+      <meta itemprop="description" content="时刻准备着">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="bitxiaozhang">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          简单学习Groovy
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-06-24 20:49:47" itemprop="dateCreated datePublished" datetime="2017-06-24T20:49:47+08:00">2017-06-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2018-09-24 20:57:05" itemprop="dateModified" datetime="2018-09-24T20:57:05+08:00">2018-09-24</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>基于该网站<a href="http://www.infoq.com/cn/articles/android-in-depth-gradle/" target="_blank" rel="noopener">深入理解groovy</a>学习，Android Studio使用gradle工具进行打包编译的，而gradle使用groovy语言编写的，groovy是一种DSL语言，即Domain Specific Language领域相关语言，有很多默认的潜规则，使用起来非常灵活。</p>
+<h4 id="Groovy的开发环境"><a href="#Groovy的开发环境" class="headerlink" title="Groovy的开发环境"></a>Groovy的开发环境</h4><p>在ubuntu上搭建groovy的开发环境还是非常简单的，具体也可以参考官网<a href="http://www.groovy-lang.org/download.html#gvm" target="_blank" rel="noopener">groovy官网</a><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">- curl -s get.gvmtool.net | bash </span><br><span class="line">- <span class="built_in">source</span> <span class="string">"<span class="variable">$HOME</span>/.gvm/bin/gvm-init.sh"</span></span><br><span class="line">- gvm install groovy</span><br></pre></td></tr></table></figure></p>
+<p>然后就可以创建一个<em>.groovy文件，比如说test.groovy文件，使用groovy </em>.groovy运行执行，感觉非常像shell脚本似的</p>
+<h4 id="Groovy的一些基础知识哦"><a href="#Groovy的一些基础知识哦" class="headerlink" title="Groovy的一些基础知识哦"></a>Groovy的一些基础知识哦</h4><ol>
+<li>Groovy的注释标记和java是一样的</li>
+<li>Groovy语句可以不用分号结尾，也是减少了代码的输入量啊</li>
+<li>Groovy支持动态类型，和很多动态语言是一样的，定义变量的时候不用指定数据类型，但是尽量还是使用def关键字进行声明，虽然不用也是可以的，不过这个还是有坑。。。<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> variable1 = <span class="number">1</span>   <span class="comment">//可以不使用分号结尾</span></span><br><span class="line"><span class="keyword">def</span> varable2 = <span class="string">"I am a person"</span></span><br><span class="line"><span class="keyword">def</span> <span class="keyword">int</span> x = <span class="number">1</span>   <span class="comment">//变量定义时，也可以直接指定类型</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>4.定义函数的时候也是可以不用指定参数的类型的<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">String function(arg1,arg2)&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>函数的返回值也是可以不用指定的，没有指定函数返回值的会根据函数内最用一句的执行结果进行返回，并且使用def进行声明，举个栗子：<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> fuction1()&#123;</span><br><span class="line"> ...</span><br><span class="line">    lastLine</span><br><span class="line">&#125;</span><br><span class="line">String fuction2()&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">"the returned String"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>5.Groovy对字符串的支持是非常强大的，不过还是有几个规则使用的方法</p>
+<ul>
+<li>单引号中的内容是严格的字符串，不会对$中的变量进行转义，</li>
+<li>双引号的字符串内容会对$表达式进行求值转义</li>
+<li>Groovy还是三个引号，如果是三个引号的话就可以任意的换行了<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> singleQuote=<span class="string">'I am $ dolloar'</span>  <span class="comment">//输出就是I am $ dolloar</span></span><br><span class="line"><span class="keyword">def</span> doubleQuoteWithoutDollar = <span class="string">"I am one dollar"</span> <span class="comment">//输出 I am one dollar</span></span><br><span class="line"><span class="keyword">def</span> x = <span class="number">1</span></span><br><span class="line"><span class="keyword">def</span> doubleQuoteWithDollar = <span class="string">"I am $x dolloar"</span> <span class="comment">//输出I am 1 dolloar</span></span><br><span class="line"><span class="keyword">def</span> multieLines = <span class="string">''' begin</span></span><br><span class="line"><span class="string">     line  1 </span></span><br><span class="line"><span class="string">     line  2</span></span><br><span class="line"><span class="string">     end '''</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<hr>
+<h4 id="Groovy中的数据类型"><a href="#Groovy中的数据类型" class="headerlink" title="Groovy中的数据类型"></a>Groovy中的数据类型</h4><p>在java的基本数据类型都已经被groovy包装成对象，只有对象啦。。。</p>
+<h5 id="Groovy容器类"><a href="#Groovy容器类" class="headerlink" title="Groovy容器类"></a>Groovy容器类</h5><ul>
+<li>List链表，对应的Java中的List接口，一般是用ArrayList作为真正的实现类</li>
+<li>Map键值表，其底层对应的是Java中的LinkedHashMap</li>
+<li>Range，基于List实现的一种扩展</li>
+</ul>
+<ol>
+<li><p>List</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">变量定义：List变量由[]定义，比如</span><br><span class="line"><span class="keyword">def</span> aList = [<span class="number">5</span>,<span class="string">'string'</span>,<span class="literal">true</span>] <span class="comment">//List由[]定义，其元素可以是任何对象</span></span><br><span class="line">变量存取：可以直接通过索引存取，而且不用担心索引越界。如果索引超过当前链表长度，List会自动</span><br><span class="line">往该索引添加元素</span><br><span class="line"><span class="keyword">assert</span> aList[<span class="number">1</span>] == <span class="string">'string'</span></span><br><span class="line"><span class="keyword">assert</span> aList[<span class="number">5</span>] == <span class="literal">null</span> <span class="comment">//第6个元素为空</span></span><br><span class="line">aList[<span class="number">100</span>] = <span class="number">100</span>  <span class="comment">//设置第101个元素的值为10</span></span><br><span class="line"><span class="keyword">assert</span> aList[<span class="number">100</span>] == <span class="number">100</span></span><br><span class="line">那么，aList到现在为止有多少个元素呢？</span><br><span class="line">println aList.size  ===&gt;结果是<span class="number">101</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Map</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">容器变量定义</span><br><span class="line">变量定义：Map变量由[:]定义，比如</span><br><span class="line"><span class="keyword">def</span> aMap = [<span class="string">'key1'</span>:<span class="string">'value1'</span>,<span class="string">'key2'</span>:<span class="literal">true</span>] </span><br><span class="line">Map由[:]定义，注意其中的冒号。冒号左边是key，右边是Value。key必须是字符串，value可以是任何对象。另外，key可以用<span class="string">''</span>或<span class="string">""</span>包起来，也可以不用引号包起来。比如</span><br><span class="line"><span class="keyword">def</span> aNewMap = [<span class="string">key1:</span><span class="string">"value"</span>,<span class="string">key2:</span><span class="literal">true</span>] <span class="comment">//其中的key1和key2默认被</span></span><br><span class="line">处理成字符串<span class="string">"key1"</span>和<span class="string">"key2"</span></span><br><span class="line">不过Key要是不使用引号包起来的话，也会带来一定混淆，比如</span><br><span class="line"><span class="keyword">def</span> key1=<span class="string">"wowo"</span></span><br><span class="line"><span class="keyword">def</span> aConfusedMap=[<span class="string">key1:</span><span class="string">"who am i?"</span>]</span><br><span class="line">aConfuseMap中的key1到底是<span class="string">"key1"</span>还是变量key1的值“wowo”？显然，答案是字符串<span class="string">"key1"</span>。如果要是<span class="string">"wowo"</span>的话，则aConfusedMap的定义必须设置成：</span><br><span class="line"><span class="keyword">def</span> aConfusedMap=[(key1):<span class="string">"who am i?"</span>]</span><br><span class="line">Map中元素的存取更加方便，它支持多种方法：</span><br><span class="line">println aMap.keyName    &lt;==这种表达方法好像key就是aMap的一个成员变量一样</span><br><span class="line">println aMap[<span class="string">'keyName'</span>] &lt;==这种表达方法更传统一点</span><br><span class="line">aMap.anotherkey = <span class="string">"i am map"</span>  &lt;==为map添加新元素</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Range类</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> aRange = <span class="number">1.</span><span class="number">.5</span>  &lt;==Range类型的变量 由begin值+两个点+end值表示</span><br><span class="line">                      左边这个aRange包含<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>这<span class="number">5</span>个值</span><br><span class="line">如果不想包含最后一个元素，则</span><br><span class="line"><span class="keyword">def</span> aRangeWithoutEnd = <span class="number">1.</span>.&lt;<span class="number">5</span>  &lt;==包含<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>这<span class="number">4</span>个元素</span><br><span class="line">println aRange.from</span><br><span class="line">println aRange.to</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h4 id="Groovy的闭包"><a href="#Groovy的闭包" class="headerlink" title="Groovy的闭包"></a>Groovy的闭包</h4><p>闭包是一个非常牛逼哄哄的东西，做iOS开发的应该不会默认，太方便了额，闭包，是一种数据类型，它代表了一段可执行的代码。在Groovy中定义格式是这样的<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> xxx = &#123;paramters -&gt; code&#125;  <span class="comment">//或者  </span></span><br><span class="line"><span class="keyword">def</span> xxx = &#123;无参数，纯code&#125;  <span class="comment">//这种case不需要-&gt;符号</span></span><br><span class="line"><span class="keyword">def</span> aClosure = &#123;</span><br><span class="line"><span class="comment">//闭包是一段代码，所以需要用花括号括起来..  </span></span><br><span class="line">    String param1, <span class="keyword">int</span> param2 -&gt;  <span class="comment">//这个箭头很关键。箭头前面是参数定义，箭头后面是代码  </span></span><br><span class="line">    println<span class="string">"this is code"</span> <span class="comment">//这是代码，最后一句是返回值，  </span></span><br><span class="line">   <span class="comment">//也可以使用return，和Groovy中普通函数一样  </span></span><br><span class="line">&#125;  </span><br><span class="line"><span class="comment">//调用</span></span><br><span class="line">aClosure.call(<span class="string">"this is string"</span>,<span class="number">100</span>)  <span class="comment">//或者  </span></span><br><span class="line">aClosure(<span class="string">"this is string"</span>, <span class="number">100</span>)</span><br></pre></td></tr></table></figure></p>
+<p><strong><em>如果闭包没定义参数的话，则隐含有一个参数，这个参数名字叫it，和this的作用类似。it代表闭包的参数</em>。</strong></p>
+<ul>
+<li>each函数调用的圆括号不见了！原来，Groovy中，当函数的最后一个参数是闭包的话，可以省略圆括号。<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span>  testClosure(<span class="keyword">int</span> a1,String b1, Closure closure)&#123;</span><br><span class="line">      <span class="comment">//do something</span></span><br><span class="line">      closure() <span class="comment">//调用闭包</span></span><br><span class="line">&#125;</span><br><span class="line">那么调用的时候，就可以免括号！</span><br><span class="line">testClosure (<span class="number">4</span>, <span class="string">"test"</span>, &#123;</span><br><span class="line">   println <span class="string">"i am in closure"</span></span><br><span class="line">&#125; )  <span class="comment">//红色的括号可以不写..</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<hr>
+<h4 id="脚本类、文件I-O和XML操作"><a href="#脚本类、文件I-O和XML操作" class="headerlink" title="脚本类、文件I/O和XML操作"></a>脚本类、文件I/O和XML操作</h4><h5 id="脚本中的变量和作用域"><a href="#脚本中的变量和作用域" class="headerlink" title="脚本中的变量和作用域"></a><a href="http://www.infoq.com/cn/articles/android-in-depth-gradle/" target="_blank" rel="noopener">脚本中的变量和作用域</a></h5><h5 id="文件的I-O操作"><a href="#文件的I-O操作" class="headerlink" title="文件的I/O操作"></a>文件的I/O操作</h5><p>groovy的I/O操作在原有Java的基础上进行了更为简便的封装</p>
+<ul>
+<li>读文件<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> targetFile = <span class="keyword">new</span> File(文件名);  <span class="comment">//&lt;==File对象还是要创建的。</span></span><br><span class="line"><span class="comment">//直接得到文件内容</span></span><br><span class="line">targetFile.getBytes()  <span class="comment">//&lt;==文件内容一次性读出，返回类型为byte[]  </span></span><br><span class="line"><span class="comment">//使用InputStream.InputStream</span></span><br><span class="line"><span class="keyword">def</span> ism =  targetFile.newInputStream()  </span><br><span class="line"><span class="comment">//操作ism，最后记得关掉  </span></span><br><span class="line">ism.close </span><br><span class="line"><span class="comment">//使用闭包操作inputStream</span></span><br><span class="line"> targetFile.withInputStream&#123; ism -&gt;</span><br><span class="line">   <span class="comment">//操作ism.不用close。Groovy会自动替你close</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//写文件和读文件一样</span></span><br><span class="line"><span class="keyword">def</span> srcFile = <span class="keyword">new</span> File(源文件名)  </span><br><span class="line"><span class="keyword">def</span> targetFile = <span class="keyword">new</span> File(目标文件名)  </span><br><span class="line">targetFile.withOutputStream&#123; os-&gt;  </span><br><span class="line">  srcFile.withInputStream&#123; ins-&gt;  </span><br><span class="line">      os &lt;&lt; ins   <span class="comment">//利用OutputStream的&lt;&lt;操作符重载，完成从inputstream到OutputStream  </span></span><br><span class="line">       <span class="comment">//的输出  </span></span><br><span class="line">   &#125;  </span><br><span class="line">&#125;  </span><br><span class="line"><span class="comment">//</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h5 id="XML操作"><a href="#XML操作" class="headerlink" title="XML操作"></a>XML操作</h5><p>除了I/O异常简单之外，Groovy中的XML操作也极致得很。Groovy中，XML的解析提供了和XPath类似的方法，名为GPath。这是一个类，提供相应API。关于XPath，请看<a href="https://en.wikipedia.org/wiki/XPath" target="_blank" rel="noopener">Wiki</a>。<br>GPath功能包括：给个例子好了，来自Groovy官方文档</p>
+<p>test.xml文件：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">response</span> <span class="attr">version-api</span>=<span class="string">"2.0"</span>&gt;</span>  </span><br><span class="line">       <span class="tag">&lt;<span class="name">value</span>&gt;</span>  </span><br><span class="line">           <span class="tag">&lt;<span class="name">books</span>&gt;</span>  </span><br><span class="line">               <span class="tag">&lt;<span class="name">book</span> <span class="attr">available</span>=<span class="string">"20"</span> <span class="attr">id</span>=<span class="string">"1"</span>&gt;</span>  </span><br><span class="line">                   <span class="tag">&lt;<span class="name">title</span>&gt;</span>Don Xijote<span class="tag">&lt;/<span class="name">title</span>&gt;</span>  </span><br><span class="line">                   <span class="tag">&lt;<span class="name">author</span> <span class="attr">id</span>=<span class="string">"1"</span>&gt;</span>Manuel De Cervantes<span class="tag">&lt;/<span class="name">author</span>&gt;</span>  </span><br><span class="line">               <span class="tag">&lt;/<span class="name">book</span>&gt;</span>  </span><br><span class="line">               <span class="tag">&lt;<span class="name">book</span> <span class="attr">available</span>=<span class="string">"14"</span> <span class="attr">id</span>=<span class="string">"2"</span>&gt;</span>  </span><br><span class="line">                   <span class="tag">&lt;<span class="name">title</span>&gt;</span>Catcher in the Rye<span class="tag">&lt;/<span class="name">title</span>&gt;</span>  </span><br><span class="line">                  <span class="tag">&lt;<span class="name">author</span> <span class="attr">id</span>=<span class="string">"2"</span>&gt;</span>JD Salinger<span class="tag">&lt;/<span class="name">author</span>&gt;</span>  </span><br><span class="line">              <span class="tag">&lt;/<span class="name">book</span>&gt;</span>  </span><br><span class="line">              <span class="tag">&lt;<span class="name">book</span> <span class="attr">available</span>=<span class="string">"13"</span> <span class="attr">id</span>=<span class="string">"3"</span>&gt;</span>  </span><br><span class="line">                  <span class="tag">&lt;<span class="name">title</span>&gt;</span>Alice in Wonderland<span class="tag">&lt;/<span class="name">title</span>&gt;</span>  </span><br><span class="line">                  <span class="tag">&lt;<span class="name">author</span> <span class="attr">id</span>=<span class="string">"3"</span>&gt;</span>Lewis Carroll<span class="tag">&lt;/<span class="name">author</span>&gt;</span>  </span><br><span class="line">              <span class="tag">&lt;/<span class="name">book</span>&gt;</span>  </span><br><span class="line">              <span class="tag">&lt;<span class="name">book</span> <span class="attr">available</span>=<span class="string">"5"</span> <span class="attr">id</span>=<span class="string">"4"</span>&gt;</span>  </span><br><span class="line">                  <span class="tag">&lt;<span class="name">title</span>&gt;</span>Don Xijote<span class="tag">&lt;/<span class="name">title</span>&gt;</span>  </span><br><span class="line">                  <span class="tag">&lt;<span class="name">author</span> <span class="attr">id</span>=<span class="string">"4"</span>&gt;</span>Manuel De Cervantes<span class="tag">&lt;/<span class="name">author</span>&gt;</span>  </span><br><span class="line">              <span class="tag">&lt;/<span class="name">book</span>&gt;</span>  </span><br><span class="line">           <span class="tag">&lt;/<span class="name">books</span>&gt;</span>  </span><br><span class="line">      <span class="tag">&lt;/<span class="name">value</span>&gt;</span>  </span><br><span class="line">   <span class="tag">&lt;/<span class="name">response</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>groovy解析</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//第一步，创建XmlSlurper类  </span></span><br><span class="line"><span class="keyword">def</span> xparser = <span class="keyword">new</span> XmlSlurper()  </span><br><span class="line"><span class="keyword">def</span> targetFile = <span class="keyword">new</span> File(<span class="string">"test.xml"</span>)  </span><br><span class="line"><span class="comment">//轰轰的GPath出场  </span></span><br><span class="line">GPathResult gpathResult =xparser.parse(targetFile)  </span><br><span class="line">   </span><br><span class="line"><span class="comment">//开始玩test.xml。现在我要访问id=4的book元素。  </span></span><br><span class="line"><span class="comment">//下面这种搞法，gpathResult代表根元素response。通过e1.e2.e3这种  </span></span><br><span class="line"><span class="comment">//格式就能访问到各级子元素....  </span></span><br><span class="line"><span class="keyword">def</span> book4 = gpathResult.value.books.book[<span class="number">3</span>]  </span><br><span class="line"><span class="comment">//得到book4的author元素  </span></span><br><span class="line"><span class="keyword">def</span> author = book4.author  </span><br><span class="line"><span class="comment">//再来获取元素的属性和textvalue  </span></span><br><span class="line"><span class="keyword">assert</span> author.text() == <span class="string">' Manuel De Cervantes '</span>  </span><br><span class="line"><span class="comment">//获取属性更直观  </span></span><br><span class="line">author.<span class="meta">@id</span> == <span class="string">'4'</span> <span class="comment">//或者</span></span><br><span class="line">author[<span class="string">'@id'</span>] == <span class="string">'4'</span>  </span><br><span class="line"><span class="comment">//属性一般是字符串，可通过toInteger转换成整数  </span></span><br><span class="line">author.<span class="meta">@id</span>.toInteger() == <span class="number">4</span>  </span><br><span class="line"><span class="comment">//好了。GPath就说到这。再看个例子。我在使用Gradle的时候有个需求，就是获取AndroidManifest.xml版本号（versionName）。有了GPath，一行代码搞定，请看：  </span></span><br><span class="line"><span class="keyword">def</span> androidManifest = newXmlSlurper().parse(<span class="string">"AndroidManifest.xml"</span>)  </span><br><span class="line">println androidManifest[<span class="string">'@android:versionName'</span>]  </span><br><span class="line"><span class="comment">//或者  </span></span><br><span class="line">println androidManifest.@<span class="string">'android:versionName'</span></span><br></pre></td></tr></table></figure>
+<p>学习自<a href="http://www.infoq.com/cn/articles/android-in-depth-gradle/" target="_blank" rel="noopener">InfoQ</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Groovy/" rel="tag"># -Groovy</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2017/06/25/SharedPreference和RxJava以及对SharedPreferece添加wrapper/" rel="next" title="SharedPreference和RxJava以及对SharedPreferece添加wrapper">
+      SharedPreference和RxJava以及对SharedPreferece添加wrapper <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#Groovy的开发环境"><span class="nav-number">1.</span> <span class="nav-text">Groovy的开发环境</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Groovy的一些基础知识哦"><span class="nav-number">2.</span> <span class="nav-text">Groovy的一些基础知识哦</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Groovy中的数据类型"><span class="nav-number">3.</span> <span class="nav-text">Groovy中的数据类型</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Groovy容器类"><span class="nav-number">3.1.</span> <span class="nav-text">Groovy容器类</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Groovy的闭包"><span class="nav-number">4.</span> <span class="nav-text">Groovy的闭包</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#脚本类、文件I-O和XML操作"><span class="nav-number">5.</span> <span class="nav-text">脚本类、文件I/O和XML操作</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#脚本中的变量和作用域"><span class="nav-number">5.1.</span> <span class="nav-text">脚本中的变量和作用域</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#文件的I-O操作"><span class="nav-number">5.2.</span> <span class="nav-text">文件的I/O操作</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#XML操作"><span class="nav-number">5.3.</span> <span class="nav-text">XML操作</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">BITXIAOZHANG</p>
+  <div class="site-description" itemprop="description">时刻准备着</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">3</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">BITXIAOZHANG</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.7.1
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://muse.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.7.0
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/muse.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

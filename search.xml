@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[Mac node升级到最新版本]]></title>
     <url>%2F2020%2F01%2F09%2FMac-node%E5%8D%87%E7%BA%A7%E5%88%B0%E6%9C%80%E6%96%B0%E7%89%88%E6%9C%AC%2F</url>
-    <content type="text"><![CDATA[第一步，先查看本机node.js版本： -v```1234第二步，清除node.js的cache：&gt;```sudo npm cache clean -f 第三步，安装 n 工具，这个工具是专门用来管理node.js版本的，别怀疑这个工具的名字，是他是他就是他，他的名字就是 “n” npm install -g n```1234第四步，安装最新版本的node.js&gt;```sudo n stable 第五步，再次查看本机的node.js版本： -v```1234第六步，更新npm到最新版：&gt;```$ sudo npm install npm@latest -g 第七步，验证 -v```1&gt;```npm -v]]></content>
+    <content type="text"><![CDATA[第一步，先查看本机node.js版本： -v```1234第二步，清除node.js的cache：```sudo npm cache clean -f 第三步，安装 n 工具，这个工具是专门用来管理node.js版本的，别怀疑这个工具的名字，是他是他就是他，他的名字就是 “n” npm install -g n```1234第四步，安装最新版本的node.js```sudo n stable 第五步，再次查看本机的node.js版本： -v```1234第六步，更新npm到最新版：```$ sudo npm install npm@latest -g 第七步，验证 -v```1```npm -v]]></content>
       <tags>
         <tag>Mac,Node,npm</tag>
       </tags>

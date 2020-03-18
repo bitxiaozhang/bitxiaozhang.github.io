@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Android开发的一些实用命令.md]]></title>
+    <url>%2F2020%2F03%2F18%2FAndroid%E5%BC%80%E5%8F%91%E7%9A%84%E4%B8%80%E4%BA%9B%E5%AE%9E%E7%94%A8%E5%91%BD%E4%BB%A4%2F</url>
+    <content type="text"><![CDATA[1、测试启动Activity的启动时间，可以大概判断应用的启动性能：1adb shell am start -S -R 10 -W com.xxx.xxx/xxx.xx.StartActivity 2、查看应用运行的内存情况, 查看activity的释放情况1adb shell dumpsys meminfo com.xxx.xxx[package] 3、清理app数据，免得去应用设置中去清理数据1adb shell pm clear com.xxx.xxx[package] 4、查看项目中某个module的依赖树1./gradlew moduleName:dependencies]]></content>
+  </entry>
+  <entry>
     <title><![CDATA[Mac node升级到最新版本]]></title>
     <url>%2F2020%2F01%2F09%2FMac-node%E5%8D%87%E7%BA%A7%E5%88%B0%E6%9C%80%E6%96%B0%E7%89%88%E6%9C%AC%2F</url>
     <content type="text"><![CDATA[第一步，先查看本机node.js版本： 1node -v 第二步，清除node.js的cache： 1sudo npm cache clean -f 第三步，安装 n 工具，这个工具是专门用来管理node.js版本的，别怀疑这个工具的名字，是他是他就是他，他的名字就是 “n” 1sudo npm install -g n 第四步，安装最新版本的node.js 1sudo n stable 第五步，再次查看本机的node.js版本： 1node -v 第六步，更新npm到最新版： 1$ sudo npm install npm@latest -g 第七步，验证 12node -vnpm -v]]></content>

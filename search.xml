@@ -8,7 +8,9 @@
         <category>-Android</category>
       </categories>
       <tags>
-        <tag>-Android -adb -Gradle</tag>
+        <tag>Android</tag>
+        <tag>adb</tag>
+        <tag>Gradle</tag>
       </tags>
   </entry>
   <entry>
@@ -16,10 +18,12 @@
     <url>%2F2020%2F01%2F09%2FMac-node%E5%8D%87%E7%BA%A7%E5%88%B0%E6%9C%80%E6%96%B0%E7%89%88%E6%9C%AC%2F</url>
     <content type="text"><![CDATA[第一步，先查看本机node.js版本： 1node -v 第二步，清除node.js的cache： 1sudo npm cache clean -f 第三步，安装 n 工具，这个工具是专门用来管理node.js版本的，别怀疑这个工具的名字，是他是他就是他，他的名字就是 “n” 1sudo npm install -g n 第四步，安装最新版本的node.js 1sudo n stable 第五步，再次查看本机的node.js版本： 1node -v 第六步，更新npm到最新版： 1$ sudo npm install npm@latest -g 第七步，验证 12node -vnpm -v]]></content>
       <categories>
-        <category>-Node</category>
+        <category>Node</category>
       </categories>
       <tags>
-        <tag>-Mac,Node,npm</tag>
+        <tag>Mac</tag>
+        <tag>Node</tag>
+        <tag>npm</tag>
       </tags>
   </entry>
   <entry>
@@ -41,7 +45,8 @@
         <category>-Android</category>
       </categories>
       <tags>
-        <tag>-Android -SharedPerference</tag>
+        <tag>Android</tag>
+        <tag>SharedPerference</tag>
       </tags>
   </entry>
   <entry>
@@ -49,10 +54,10 @@
     <url>%2F2017%2F06%2F24%2F%E7%AE%80%E5%8D%95%E5%AD%A6%E4%B9%A0Groovy%2F</url>
     <content type="text"><![CDATA[基于该网站深入理解groovy学习，Android Studio使用gradle工具进行打包编译的，而gradle使用groovy语言编写的，groovy是一种DSL语言，即Domain Specific Language领域相关语言，有很多默认的潜规则，使用起来非常灵活。 Groovy的开发环境在ubuntu上搭建groovy的开发环境还是非常简单的，具体也可以参考官网groovy官网123- curl -s get.gvmtool.net | bash - source "$HOME/.gvm/bin/gvm-init.sh"- gvm install groovy 然后就可以创建一个.groovy文件，比如说test.groovy文件，使用groovy .groovy运行执行，感觉非常像shell脚本似的 Groovy的一些基础知识哦 Groovy的注释标记和java是一样的 Groovy语句可以不用分号结尾，也是减少了代码的输入量啊 Groovy支持动态类型，和很多动态语言是一样的，定义变量的时候不用指定数据类型，但是尽量还是使用def关键字进行声明，虽然不用也是可以的，不过这个还是有坑。。。123def variable1 = 1 //可以不使用分号结尾def varable2 = "I am a person"def int x = 1 //变量定义时，也可以直接指定类型 4.定义函数的时候也是可以不用指定参数的类型的123String function(arg1,arg2)&#123; ...&#125; 函数的返回值也是可以不用指定的，没有指定函数返回值的会根据函数内最用一句的执行结果进行返回，并且使用def进行声明，举个栗子：1234567def fuction1()&#123; ... lastLine&#125;String fuction2()&#123; return "the returned String"&#125; 5.Groovy对字符串的支持是非常强大的，不过还是有几个规则使用的方法 单引号中的内容是严格的字符串，不会对$中的变量进行转义， 双引号的字符串内容会对$表达式进行求值转义 Groovy还是三个引号，如果是三个引号的话就可以任意的换行了12345678def singleQuote='I am $ dolloar' //输出就是I am $ dolloardef doubleQuoteWithoutDollar = "I am one dollar" //输出 I am one dollardef x = 1def doubleQuoteWithDollar = "I am $x dolloar" //输出I am 1 dolloardef multieLines = ''' begin line 1 line 2 end ''' Groovy中的数据类型在java的基本数据类型都已经被groovy包装成对象，只有对象啦。。。 Groovy容器类 List链表，对应的Java中的List接口，一般是用ArrayList作为真正的实现类 Map键值表，其底层对应的是Java中的LinkedHashMap Range，基于List实现的一种扩展 List 12345678910变量定义：List变量由[]定义，比如def aList = [5,'string',true] //List由[]定义，其元素可以是任何对象变量存取：可以直接通过索引存取，而且不用担心索引越界。如果索引超过当前链表长度，List会自动往该索引添加元素assert aList[1] == 'string'assert aList[5] == null //第6个元素为空aList[100] = 100 //设置第101个元素的值为10assert aList[100] == 100那么，aList到现在为止有多少个元素呢？println aList.size ===&gt;结果是101 Map 123456789101112131415容器变量定义变量定义：Map变量由[:]定义，比如def aMap = ['key1':'value1','key2':true] Map由[:]定义，注意其中的冒号。冒号左边是key，右边是Value。key必须是字符串，value可以是任何对象。另外，key可以用''或""包起来，也可以不用引号包起来。比如def aNewMap = [key1:"value",key2:true] //其中的key1和key2默认被处理成字符串"key1"和"key2"不过Key要是不使用引号包起来的话，也会带来一定混淆，比如def key1="wowo"def aConfusedMap=[key1:"who am i?"]aConfuseMap中的key1到底是"key1"还是变量key1的值“wowo”？显然，答案是字符串"key1"。如果要是"wowo"的话，则aConfusedMap的定义必须设置成：def aConfusedMap=[(key1):"who am i?"]Map中元素的存取更加方便，它支持多种方法：println aMap.keyName &lt;==这种表达方法好像key就是aMap的一个成员变量一样println aMap['keyName'] &lt;==这种表达方法更传统一点aMap.anotherkey = "i am map" &lt;==为map添加新元素 Range类 123456def aRange = 1..5 &lt;==Range类型的变量 由begin值+两个点+end值表示 左边这个aRange包含1,2,3,4,5这5个值如果不想包含最后一个元素，则def aRangeWithoutEnd = 1..&lt;5 &lt;==包含1,2,3,4这4个元素println aRange.fromprintln aRange.to Groovy的闭包闭包是一个非常牛逼哄哄的东西，做iOS开发的应该不会默认，太方便了额，闭包，是一种数据类型，它代表了一段可执行的代码。在Groovy中定义格式是这样的1234567891011def xxx = &#123;paramters -&gt; code&#125; //或者 def xxx = &#123;无参数，纯code&#125; //这种case不需要-&gt;符号def aClosure = &#123;//闭包是一段代码，所以需要用花括号括起来.. String param1, int param2 -&gt; //这个箭头很关键。箭头前面是参数定义，箭头后面是代码 println"this is code" //这是代码，最后一句是返回值， //也可以使用return，和Groovy中普通函数一样 &#125; //调用aClosure.call("this is string",100) //或者 aClosure("this is string", 100) 如果闭包没定义参数的话，则隐含有一个参数，这个参数名字叫it，和this的作用类似。it代表闭包的参数。 each函数调用的圆括号不见了！原来，Groovy中，当函数的最后一个参数是闭包的话，可以省略圆括号。12345678def testClosure(int a1,String b1, Closure closure)&#123; //do something closure() //调用闭包&#125;那么调用的时候，就可以免括号！testClosure (4, "test", &#123; println "i am in closure"&#125; ) //红色的括号可以不写.. 脚本类、文件I/O和XML操作脚本中的变量和作用域文件的I/O操作groovy的I/O操作在原有Java的基础上进行了更为简便的封装 读文件123456789101112131415161718192021def targetFile = new File(文件名); //&lt;==File对象还是要创建的。//直接得到文件内容targetFile.getBytes() //&lt;==文件内容一次性读出，返回类型为byte[] //使用InputStream.InputStreamdef ism = targetFile.newInputStream() //操作ism，最后记得关掉 ism.close //使用闭包操作inputStream targetFile.withInputStream&#123; ism -&gt; //操作ism.不用close。Groovy会自动替你close&#125;//写文件和读文件一样def srcFile = new File(源文件名) def targetFile = new File(目标文件名) targetFile.withOutputStream&#123; os-&gt; srcFile.withInputStream&#123; ins-&gt; os &lt;&lt; ins //利用OutputStream的&lt;&lt;操作符重载，完成从inputstream到OutputStream //的输出 &#125; &#125; // XML操作除了I/O异常简单之外，Groovy中的XML操作也极致得很。Groovy中，XML的解析提供了和XPath类似的方法，名为GPath。这是一个类，提供相应API。关于XPath，请看Wiki。GPath功能包括：给个例子好了，来自Groovy官方文档 test.xml文件：12345678910111213141516171819202122&lt;response version-api="2.0"&gt; &lt;value&gt; &lt;books&gt; &lt;book available="20" id="1"&gt; &lt;title&gt;Don Xijote&lt;/title&gt; &lt;author id="1"&gt;Manuel De Cervantes&lt;/author&gt; &lt;/book&gt; &lt;book available="14" id="2"&gt; &lt;title&gt;Catcher in the Rye&lt;/title&gt; &lt;author id="2"&gt;JD Salinger&lt;/author&gt; &lt;/book&gt; &lt;book available="13" id="3"&gt; &lt;title&gt;Alice in Wonderland&lt;/title&gt; &lt;author id="3"&gt;Lewis Carroll&lt;/author&gt; &lt;/book&gt; &lt;book available="5" id="4"&gt; &lt;title&gt;Don Xijote&lt;/title&gt; &lt;author id="4"&gt;Manuel De Cervantes&lt;/author&gt; &lt;/book&gt; &lt;/books&gt; &lt;/value&gt; &lt;/response&gt; groovy解析 123456789101112131415161718192021222324//第一步，创建XmlSlurper类 def xparser = new XmlSlurper() def targetFile = new File("test.xml") //轰轰的GPath出场 GPathResult gpathResult =xparser.parse(targetFile) //开始玩test.xml。现在我要访问id=4的book元素。 //下面这种搞法，gpathResult代表根元素response。通过e1.e2.e3这种 //格式就能访问到各级子元素.... def book4 = gpathResult.value.books.book[3] //得到book4的author元素 def author = book4.author //再来获取元素的属性和textvalue assert author.text() == ' Manuel De Cervantes ' //获取属性更直观 author.@id == '4' //或者author['@id'] == '4' //属性一般是字符串，可通过toInteger转换成整数 author.@id.toInteger() == 4 //好了。GPath就说到这。再看个例子。我在使用Gradle的时候有个需求，就是获取AndroidManifest.xml版本号（versionName）。有了GPath，一行代码搞定，请看： def androidManifest = newXmlSlurper().parse("AndroidManifest.xml") println androidManifest['@android:versionName'] //或者 println androidManifest.@'android:versionName' 学习自InfoQ]]></content>
       <categories>
-        <category>-Android</category>
+        <category>Android</category>
       </categories>
       <tags>
-        <tag>-Groovy</tag>
+        <tag>Groovy</tag>
       </tags>
   </entry>
 </search>
